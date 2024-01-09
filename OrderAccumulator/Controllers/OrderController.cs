@@ -22,17 +22,31 @@ namespace OrderAccumulator.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<List<OrderModel>>> GetAllOrders()
+        public async Task<ActionResult<OrderModel>> GetOrderById(int id)
         {
-            List<OrderModel> orders = await _orderRepository.GetAll();
-            return orders;
+            OrderModel order = await _orderRepository.Get(id);
+            return order;
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<OrderModel>>> GetAllOrders([FromBody] OrderModel order)
+        public async Task<ActionResult<OrderModel>> CreateOrder([FromBody] OrderModel order)
         {
-            List<OrderModel> orders = await _orderRepository.GetAll();
-            return orders;
+            OrderModel result = await _orderRepository.Create(order);
+            return result;
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<OrderModel>> UpdateOrder([FromBody] OrderModel order, int id)
+        {
+            OrderModel result = await _orderRepository.Update(order, id);
+            return result;
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<bool>> DeleteOrder(int id)
+        {
+            bool result = await _orderRepository.Delete(id);
+            return result;
         }
     }
 }
