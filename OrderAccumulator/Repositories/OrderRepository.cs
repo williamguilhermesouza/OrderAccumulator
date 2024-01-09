@@ -8,7 +8,10 @@ namespace OrderAccumulator.Repositories
     public class OrderRepository : IOrderRepository
     {
         private readonly OrdersDbContext _dbContext;
-        public OrderRepository(OrdersDbContext ordersDbContext) { }
+        public OrderRepository(OrdersDbContext ordersDbContext) 
+        {
+            _dbContext = ordersDbContext;
+        }
         public async Task<List<OrderModel>> GetAll()
         {
             return await _dbContext.Orders.ToListAsync();
