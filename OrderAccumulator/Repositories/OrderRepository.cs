@@ -17,7 +17,7 @@ namespace OrderAccumulator.Repositories
         {
             return await _dbContext.Orders.ToListAsync();
         }
-        public async Task<OrderModel> Get(int id)
+        public async Task<OrderModel?> Get(int id)
         {
             return await _dbContext.Orders.FirstOrDefaultAsync(x => x.Id == id);
         }
@@ -30,7 +30,7 @@ namespace OrderAccumulator.Repositories
         }
         public async Task<OrderModel> Update(OrderModel order, int id)
         {
-            OrderModel orderModel = await Get(id);
+            OrderModel? orderModel = await Get(id);
 
             if (orderModel == null)
             {
@@ -59,6 +59,39 @@ namespace OrderAccumulator.Repositories
             _dbContext.Orders.Remove(orderModel);
             await _dbContext.SaveChangesAsync();
             return true;
+
+        }
+
+        public async Task<decimal> CalculateExposure(OrderModel order)
+        {
+            List<OrderModel> allOrders = await GetAll();
+
+            var filterByStock = allOrders.Where(listOrder => listOrder.Name == order.Name);
+
+            // exposure begins with the order exposure
+            decimal exposure = 0;
+            if (order.Side == "C") 
+            {
+                exposure = order.Quantity * order.Price; 
+            }
+            else
+            {
+                exposure = -(order.Quantity * order.Price);
+            }
+
+            foreach (var item in filterByStock)
+            {
+                if (item.Side == "C")
+                {
+                    exposure += (item.Quantity * item.Price);
+                }
+                else
+                {
+                    exposure -= (item.Quantity * item.Price);
+                }
+            }
+
+            return exposure;
 
         }
     }
