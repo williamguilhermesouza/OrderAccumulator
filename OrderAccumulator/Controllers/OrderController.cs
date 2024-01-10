@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using OrderAccumulator.Models;
 using OrderAccumulator.Repositories.Interfaces;
 
@@ -32,7 +31,7 @@ namespace OrderAccumulator.Controllers
         public async Task<ActionResult<OrderModel>> CreateOrder([FromBody] OrderModel order)
         {
             OrderModel result = await _orderRepository.Create(order);
-            return result;
+            return order;
         }
 
         [HttpPut("{id}")]

@@ -7,6 +7,7 @@ namespace OrderAccumulator.Repositories
 {
     public class OrderRepository : IOrderRepository
     {
+        // must create exposition function for all stocks and improve with cache
         private readonly OrdersDbContext _dbContext;
         public OrderRepository(OrdersDbContext ordersDbContext) 
         {
@@ -20,8 +21,9 @@ namespace OrderAccumulator.Repositories
         {
             return await _dbContext.Orders.FirstOrDefaultAsync(x => x.Id == id);
         }
-        public async Task<OrderModel> Create(OrderModel order)
+        public async Task<OrderModel> Create(OrderModel orderModel)
         {
+            OrderModel order = orderModel;
             await _dbContext.Orders.AddAsync(order);
             await _dbContext.SaveChangesAsync();
             return order;

@@ -29,9 +29,10 @@ namespace OrderAccumulator.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Name")
+                    b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("int")
+                        .HasColumnType("nvarchar(255)")
                         .HasAnnotation("Relational:JsonPropertyName", "ativo");
 
                     b.Property<decimal>("Price")
@@ -42,8 +43,9 @@ namespace OrderAccumulator.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("Relational:JsonPropertyName", "quantidade");
 
-                    b.Property<int>("Side")
-                        .HasColumnType("int")
+                    b.Property<string>("Side")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "lado");
 
                     b.HasKey("Id");

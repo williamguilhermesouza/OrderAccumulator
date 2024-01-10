@@ -1,5 +1,4 @@
-﻿using OrderAccumulator.Enums;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
@@ -9,9 +8,9 @@ namespace OrderAccumulator.Models
     {
         public int Id {  get; set; }
         [JsonPropertyName("ativo")]
-        public required Stock Name { get; set; }
+        public required string Name { get; set; }
         [JsonPropertyName("lado")]
-        public required Side Side { get; set; }
+        public required string Side { get; set; }
         [JsonPropertyName("quantidade")]
         public required int Quantity { get; set; }
         [JsonPropertyName("preco")]
