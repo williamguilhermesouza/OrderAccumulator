@@ -17,6 +17,14 @@ builder.Services.AddEntityFrameworkSqlServer().AddDbContext<OrdersDbContext>(
     );
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
+builder.Services.AddCors(o => o.AddPolicy("AllowLocalPolicy",
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:4200")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                    }));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -27,6 +35,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowLocalPolicy");
 
 app.UseAuthorization();
 
