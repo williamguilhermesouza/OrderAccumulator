@@ -88,6 +88,17 @@ namespace OrderAccumulator.Controllers
             {
                 throw new Exception("Lado inválido.");
             }
+
+            // validating quantity
+            if (order.Quantity < 0 || order.Quantity > 100000) {
+                throw new Exception("Quantidade inválida.");
+            }
+
+            // validating price
+            if (order.Price < 0 || order.Price > 1000)
+            {
+                throw new Exception("Preço inválido.");
+            }
         }
     }
 }
