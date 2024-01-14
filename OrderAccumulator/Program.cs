@@ -12,7 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddEntityFrameworkSqlServer().AddDbContext<OrdersDbContext>(
+builder.Services.AddDbContext<OrdersDbContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase"))
     );
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
