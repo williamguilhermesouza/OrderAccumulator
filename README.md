@@ -1,5 +1,7 @@
 # OrderAccumulator
 
+![order-accumulator](https://raw.githubusercontent.com/williamguilhermesouza/OrderAccumulator/main/order-accumulator.gif)
+
 This is a C# Entity Framework API, built in order to store / calculate exposure of stock orders. The API is meant to be a backend to
 the Order Generator Angular App, and has a complete CRUD of the orders, although they're not all used in frontend.
 
