@@ -18,10 +18,13 @@ After this setup, you can run the Backend with:
 
 > dotnet run --project .\OrderAccumulator\
 
-Also, I'm sending a dockerfile, so you could create a docker image with:
+Also, I'm sending a dockerfile and a docker-compose file, so you could create a docker image with:
 
-> docker build -t OrderAccumulator .
+> docker build -t orderaccumulator .
 
 And run with:
 
-> docker run -dp 127.0.0.1:5279:5279 OrderAccumulator
+> docker-compose up
+
+Just remember to uncomment the docker connection string at appsettings.json, and comment the local one.
+
