@@ -26,5 +26,5 @@ And run with:
 
 > docker-compose up
 
-Just remember to uncomment the docker connection string at appsettings.json, and comment the local one.
+Just remember to uncomment the docker connection string at appsettings.json, and comment the local one. The migrations are run automatically at startup.
 

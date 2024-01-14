@@ -1,3 +1,3 @@
 #!/bin/bash
 
-/usr/src/app/createdb.sh & /opt/mssql/bin/sqlservr
+./createdb.sh & /opt/mssql/bin/sqlservr

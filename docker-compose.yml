@@ -5,7 +5,8 @@ services:
     container_name: orderaccumulator
     ports:
       - "5279:8080"
-    command: dotnet ef database update
+    depends_on:
+      - sql
   sql:
     image: "mcr.microsoft.com/mssql/server:2022-latest"
     container_name: sql_server2022
@@ -14,7 +15,4 @@ services:
     environment:
       - ACCEPT_EULA=y
       - SA_PASSWORD=A&VeryComplex123Password
-    command: 
-      - /bin/bash ./db-entrypoint.sh
-    volumes:
-      - ./db-entrypoint.sh:/db-entrypoint.sh
+    
